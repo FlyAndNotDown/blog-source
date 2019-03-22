@@ -1,2 +1,2 @@
-# blog-source
-✒ Kindem的博客 - 博文 Markdown 源文件仓库
+# 😀 Kindem 的博客 - 文章 Markdown 源码仓库
+本仓库从 [老仓库](https://github.com/FlyAndNotDown/blog-markdown) 迁移过来，存放了 [Kindem的博客](http://dev.kindemh.cn/) 中所有文章的`Markdown` 源码，欢迎参考学习、`star`、`fork`
