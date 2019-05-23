@@ -46,7 +46,7 @@ function getPostNames() {
     postNames.sort((a, b) => {
         const numberA = parseInt(a.split('.')[0], 10);
         const numberB = parseInt(b.split('.')[0], 10);
-        return numberA - numberB;
+        return numberB - numberA;
     });
 
     // return result
