@@ -12,6 +12,7 @@ const config = {
     readmePath: '../README.md',
     introductionPath: './introduction.md',
     postDirPath: '../post',
+    githubPostDirPath: './post',
 
     regex: {
         number: /^[1-9]\d*.md$/
@@ -79,7 +80,7 @@ function drawTable(metaInfos) {
     result += `${config.tableSectionTitle}\r\n`;
     result += '| 编号 | 标题 | 标题 | 链接 |\r\n';
     result += '| :- | :- | :- | :- |\r\n';
-    metaInfos.forEach(metaInfo => { return result += `| ${metaInfo.key} | ${metaInfo.title} | ${metaInfo.date} | [传送门](${config.postDirPath}/${metaInfo.key}.md) |\r\n`; });
+    metaInfos.forEach(metaInfo => { return result += `| ${metaInfo.key} | ${metaInfo.title} | ${metaInfo.date} | [传送门](${config.githubPostDirPath}/${metaInfo.key}.md) |\r\n`; });
     return result;
 }
 
