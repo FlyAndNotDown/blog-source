@@ -7,20 +7,17 @@
 
 // config object
 const config = {
-    // script dev mode
     devMode: true,
 
-    // README.md source file path
     readmePath: '../README.md',
-    // introduction source file path
     introductionPath: './introduction.md',
-    // post dir path
     postDirPath: '../post',
 
-    // some regex
     regex: {
         number: /^[1-9]\d*.md$/
-    }
+    },
+
+    tableSectionTitle: '# 🎯 目录'
 };
 
 // import modules
@@ -78,15 +75,20 @@ function getMetaInfos(postNames) {
 }
 
 function drawTable(metaInfos) {
-    // TODO
+    let result = '';
+    result += `${config.tableSectionTitle}\r\n`;
+    result += '| 编号 | 标题 | 标题 | 链接 |\r\n';
+    result += '| :- | :- | :- | :- |\r\n';
+    metaInfos.forEach(metaInfo => { return result += `| ${metaInfo.key} | ${metaInfo.title} | ${metaInfo.date} | [传送门](${config.postDirPath}/${metaInfo.key}.md) |\r\n`; });
+    return result;
 }
 
 function mergeResult(introduction, tableSection) {
-    return introduction + tableSection;
+    return `${introduction}\r\n\r\n` + `${tableSection}\r\n`;
 }
 
 function writeResultToReadmeFile(result) {
-    // TODO
+    fs.writeFileSync(config.readmePath, result);
 }
 
 /**
@@ -98,5 +100,5 @@ function writeResultToReadmeFile(result) {
     let metaInfos = getMetaInfos(postNames);
     let tableSection = drawTable(metaInfos);
     let result = mergeResult(introduction, tableSection);
-    writeResultToReadmeFile();
+    writeResultToReadmeFile(result);
 })();
