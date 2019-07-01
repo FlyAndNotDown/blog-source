@@ -11,8 +11,8 @@ const config = {
 
     readmePath: '../README.md',
     introductionPath: './introduction.md',
-    postDirPath: '../post',
-    githubPostDirPath: './post',
+    postDirPath: '../post/key',
+    githubPostDirPath: './post/key',
 
     regex: {
         number: /^[1-9]\d*.md$/
