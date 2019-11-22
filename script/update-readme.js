@@ -78,7 +78,7 @@ function getMetaInfos(postNames) {
 function drawTable(metaInfos) {
     let result = '';
     result += `${config.tableSectionTitle}\r\n`;
-    result += '| 编号 | 标题 | 标题 | 链接 |\r\n';
+    result += '| 编号 | 标题 | 时间 | 链接 |\r\n';
     result += '| :- | :- | :- | :- |\r\n';
     metaInfos.forEach(metaInfo => { return result += `| ${metaInfo.key} | ${metaInfo.title} | ${metaInfo.date} | [传送门](${config.githubPostDirPath}/${metaInfo.key}.md) |\r\n`; });
     return result;
