@@ -4,6 +4,8 @@
 # 🎯 目录
 | 编号 | 标题 | 时间 | 链接 |
 | :- | :- | :- | :- |
+| 26 | MacOS 搭建 OpenGL 开发环境 | 2020-4-21 | [传送门](./post/key/26.md) |
+| 25 | 个人 JetBrain IDE 配色及字体分享 | 2020-4-4 | [传送门](./post/key/25.md) |
 | 24 | Ubuntu / Debian 安装 MySQL | 2020-2-22 | [传送门](./post/key/24.md) |
 | 23 | MacOS Homebrew 安装、更新慢解决方法 | 2020-2-18 | [传送门](./post/key/23.md) |
 | 22 | MacOS 环境变量重启失效问题解决 | 2020-1-23 | [传送门](./post/key/22.md) |
