@@ -1,0 +1,19 @@
+@startuml UObject
+skinparam classAttributeIconSize 0
+
+class UObjectBase {
+    - InternalIndex: int32
+    - ClassPrivate: UClass*
+    - NamePrivate: FName
+    - OuterPrivate: UObject*
+}
+class UObjectBaseUtility {}
+class UObject {
+    + Serialize(Ar: FArchive&): void
+    + Serialize(Record: FStructuredArchive::FRecord): void
+}
+
+UObjectBase <|-- UObjectBaseUtility
+UObjectBaseUtility <|-- UObject
+
+@enduml
