@@ -17,3 +17,58 @@ UObjectBase <|-- UObjectBaseUtility
 UObjectBaseUtility <|-- UObject
 
 @enduml
+
+@startuml UField
+skinparam classAttributeIconSize 0
+
+class UObject {}
+
+class UField {
+    + Next: UField*
+}
+
+class UProperty {
+    + ContainerPtrToValuePtr<ValueType>(ContainerPtr: UObject*, ArrayIndex: int32 = 0): ValueType*
+    + ContainerPtrToValuePtr<ValueType>(ContainerPtr: void*, ArrayIndex: int32 = 0): ValueType*
+    + ContainerPtrToValuePtr<ValueType>(ContainerPtr: UObject const*, ArrayIndex: int32 = 0): ValueType const*
+    + ContainerPtrToValuePtr<ValueType>(ContainerPtr: void const*, ArrayIndex: int32 = 0): ValueType const*
+}
+
+class UNumericProperty {}
+class UByteProperty {}
+class UIntProperty {}
+class UBoolProperty {}
+
+class UEnum {
+
+}
+
+class UStruct {
+
+}
+
+class UFunction {
+
+}
+
+class UClass {
+
+}
+
+class UScriptStruct {
+    
+}
+
+UObject <|-- UField
+UField <|-- UProperty
+UField <|-- UEnum
+UField <|-- UStruct
+UStruct <|-- UFunction
+UStruct <|-- UClass
+UStruct <|-- UScriptStruct
+UProperty <|-- UNumericProperty
+UNumericProperty <|-- UByteProperty
+UNumericProperty <|-- UIntProperty
+UProperty <|-- UBoolProperty
+
+@enduml
