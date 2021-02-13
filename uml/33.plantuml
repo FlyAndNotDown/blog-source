@@ -40,24 +40,34 @@ class UIntProperty {}
 class UBoolProperty {}
 
 class UEnum {
-
+    # Names: TArray<TPair<FName, int64>>
 }
 
 class UStruct {
-
+    - SuperStruct: UStruct*
+    + Children: UField*
+    + PropertiesSize: int32
+    + MinAlignment: int32
+    + FindPropertyByName(InName: FName): FProperty*
 }
 
 class UFunction {
-
+    - Func: FNativeFuncPtr
+    + NumParms: uint8
+    + ParmsSize: uint16
+    + ReturnValueOffset: uint16
+    + Invoke(Obj: UObject*, Stack: FFrame&, Z_Param__Result: void* const): void
 }
 
 class UClass {
-
+    - FuncMap: TMap<FName, UFunction*>
+    - SuperFuncMap: TMap<FName, UFunction*>
+    + ClassConstructor: ClassConstructorType
+    + Interfaces: TArray<FImplementedInterface>
+    + FindFunctionByName(InName: FName, IncludeSuper: EIncludeSuperFlag::Type = EIncludeSuperFlag::IncludeSuper): UFunction*
 }
 
-class UScriptStruct {
-    
-}
+class UScriptStruct {}
 
 UObject <|-- UField
 UField <|-- UProperty
