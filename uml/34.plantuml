@@ -1,0 +1,67 @@
+@startuml FUObjectArray
+skinparam classAttributeIconSize 0
+
+class FUObjectArray {
+    - ObjObjects: FChunkedFixedUObjectArray
+    + AllocateObjectPool(MaxUObjects: int32, MaxObjectsNotConsideredByGC: int32, bPreAllocateObjectArray: bool): void
+    + FreeUObjectIndex(Object: UObjectBase*): void
+    + ObjectToIndex(Object: const UObjectBase*): int32
+    + IndexToObject(Index: int32): FUObjectItem*
+}
+
+@enduml 
+
+@startuml FChunkedFixedUObjectArray
+skinparam classAttributeIconSize 0
+
+class FChunkedFixedUObjectArray {
+    - Objects: FUObjectItem**
+}
+
+@enduml
+
+@startuml FUObjectHashTables
+skinparam classAttributeIconSize 0
+
+class FUObjectHashTables {
+    + Hash: TMap<int32, FHashBucket>
+    + HashOuter: TMultiMap<int32, UObjectBase*>
+    + ObjectOuterMap: TMap<UObjectBase*, FHashBucket>
+    + ClassToObjectListMap: TMap<UClass*, FHashBucket>
+    + ClassToChildListMap: TMap<UClass*, TSet<UClass*>>
+    + PackageToObjectListMap: TMap<UPackage*, FHashBucket>
+    + ObjectToPackageMap: TMap<UObjectBase*, UPackage*>
+    + static Get(): FUObjectHashTables&
+    + ShrinkMaps(): void
+    + AddToHash(InHash: int32, Object: UObjectBase*): void
+    + RemoveFromHash(InHash: int32, Object: UObjectBase*): int32
+}
+
+@enduml
+
+@startuml GC
+
+-> UWorld: Tick()
+UWorld -> UEngine: ConditionalCollectGarbage()
+UEngine -> " ": CollectGarbage()
+" " -> " ": AcquireGCLock()
+" " -> " ": CollectGarbageInternal()
+" " -> FRealtimeGC: PerformReachabilityAnalysis()
+FRealtimeGC -> FRealtimeGC: MarkObjectsAsUnreachable()
+FRealtimeGC -> FRealtimeGC: PerformReachabilityAnalysisOnObjectsInternal()
+FRealtimeGC -> TFastReferenceCollector: CollectReferences()
+FRealtimeGC <-- TFastReferenceCollector
+" " <-- FRealtimeGC
+" " -> " ": GatherUnreachableObjects()
+" " -> " ": UnhashUnreachableObjects()
+" " -> UObject: ConditionalBeginDestroy()
+UObject -> UObject: BeginDestroy()
+UObject -> UObject: LowLevelRename()
+" " <-- UObject
+" " -> " ": ShrinkUObjectHashTables()
+" " -> " ": ReleaseGCLock()
+UEngine <-- " "
+UWorld <-- UEngine
+<-- UWorld
+
+@enduml
